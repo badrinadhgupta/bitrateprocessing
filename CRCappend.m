@@ -1,39 +1,32 @@
 function datacrc = CRCappend(data,type)
     polyIndex = nr5g.internal.validateCRCinputs(data,type,0,'nrCRCEncode');
     polyLengths = [6 11 16 24 24 24];
-    len = 0;   % Initialize for codegen
-    len(:) = polyLengths(polyIndex)
+    
+    len(:) = polyLengths(polyIndex);
     
     [codeLen,numCodeBlocks] = size(data);
     
-   dataL = logical(data);
+    dataL = logical(data);
     
     
     if isempty(data)
         datacrc = zeros(codelen);
     else
         datacrcL = false(codeLen+len,numCodeBlocks);
-        
 
-
-
-
-            gPoly = getPoly(type);
-            for i = 1:numCodeBlocks
-                datacrcL(:,i) = crcEncode(double(dataL(:,i)),gPoly,len);
-            end
-             datacrc = [data; cast(datacrcL(end-len+1:end,:),class(data))];
+        gPoly = getPoly(type);
+        for i = 1:numCodeBlocks
+            datacrcL(:,i) = crcEncode(double(dataL(:,i)),gPoly,len);
+        end
+        datacrc = [data; cast(datacrcL(end-len+1:end,:),class(data))];
 
     end
 end
         
    function out = crcEncode(in,gPoly,gLen)
-% CRC Encode with all doubles inputs, logical out.
 
-    % Append zeros to the data block
     inPad = [in; zeros(gLen,1)];
-
-    % Perform cyclic redundancy check
+   
     remBits = [0; inPad(1:gLen,1)];
     for i = 1:length(inPad)-gLen
         dividendBlk = [remBits(2:end); inPad(i+gLen)];
@@ -50,7 +43,7 @@ end
 end
     
     function gPoly = getPoly(poly)
-% Initialize CRC polynomial (gPoly)
+
 
     switch poly
         case '6'
