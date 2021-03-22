@@ -1,3 +1,4 @@
+%consist of both interleaver and polar encoding
 function out = nrPolarEncode(in,E,varargin)
     narginchk(2,4);
     if nargin==2
