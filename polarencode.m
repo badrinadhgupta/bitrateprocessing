@@ -1,4 +1,4 @@
-function out = nrPolarEncode(in,E,varargin)
+function out = nrPolarEncode(msgcrc,in,E,varargin)
     narginchk(2,4)
     K = length(in);
     if iIL
