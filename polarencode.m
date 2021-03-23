@@ -1,16 +1,5 @@
-%consist of both interleaver and polar encoding
 function out = nrPolarEncode(in,E,varargin)
-    narginchk(2,4);
-    if nargin==2
-        nMax = 9;       
-        iIL = true;     
-    elseif nargin==3
-        coder.internal.errorIf(1,'nr5g:nrPolar:InvalidNumInputs');
-    else
-        nMax = varargin{1};
-        iIL = varargin{2};
-    end
-    validateInputs(in,E,nMax,iIL);
+    narginchk(2,4)
     K = length(in);
     if iIL
         pi = nr5g.internal.polar.interleaveMap(K);
@@ -55,26 +44,4 @@ function out = nrPolarEncode(in,E,varargin)
     G = allG{n};
     outd = mod(u'*G,2)';
     out = cast(outd,class(in));
-end
-function validateInputs(in,E,nMax,iIL)
-    fcnName = 'nrPolarEncode';
-    validateattributes(in,{'int8','double'},{'binary','column'}, ...
-        fcnName,'IN');
-    K = length(in);
- validateattributes(nMax,{'numeric'},{'scalar','integer'}, ...
-        fcnName,'NMAX');
-    coder.internal.errorIf( ~any(nMax == [9 10]),'nr5g:nrPolar:InvalidnMax');
-    validateattributes(iIL, {'logical'}, {'scalar'}, fcnName, 'IIL');
-    coder.internal.errorIf( nMax==9 && iIL && (K < 36 || K > 164), ...
-        'nr5g:nrPolar:InvalidInputEncDLLength',K);
-    coder.internal.errorIf( nMax==10 && ~iIL && (K<18 || (K>25 && K<31) ...
-        || K>1023), 'nr5g:nrPolar:InvalidInputEncULLength',K);
-    if (K>=18 && K<=25) % for PC-Polar
-        nPC = 3;
-    else
-        nPC = 0;
-    end
-    validateattributes(E, {'numeric'}, ...
-        {'real','scalar','integer','finite','>',K+nPC,'<=',8192}, ...
-        fcnName,'E');
 end
