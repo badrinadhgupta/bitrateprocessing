@@ -1,4 +1,5 @@
 function out = LdpcEncoder(in,bgn)
+    typeIn = class(in)
 
     if isempty(in)
         out = zeros(0,size(in,2),typeIn);
@@ -24,6 +25,6 @@ function out = LdpcEncoder(in,bgn)
     outCBall = nr5g.internal.ldpc.encode(double(in),bgn,Zc);
     outCBall(locs,:) = -1;
 
-    out = zeros(N,C,typeIn);
+    out = zeros(N,M,typeIn);
     out(:,:) = cast(outCBall(2*Zc+1:end,:),typeIn);
 end
