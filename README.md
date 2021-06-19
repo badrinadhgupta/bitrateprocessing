@@ -1,4 +1,4 @@
-# bitrateprocessing
+# Bit Rate Processing
 PESU- project on bitrateprocessing in 5G
 
 ## FLOW:
