@@ -1,7 +1,7 @@
 function cbs = crcLDPCsegmentation(blk,bgn)
-blk= randi([0,1],4000,1);
-blkLen= 4000;
-bgn = 2;
+blk= randi([0,1],10000,1);
+blkLen= 10000;
+bgn = 1;
 
 
  % Cast the input to double
