@@ -5,8 +5,8 @@
    modulation = 'QPSK';    
    nlayers = 1;            
    sbits = ones(4500,1);
-       numCB=[];
-       Nref=[];
+       numCB=[];%number of code block 
+       Nref=[];%buffer size
     modulation = validateInputs(in,trblklen,R,rv,modulation,nlayers);
     typeIn = class(in);
     if isempty(in) || ~trblklen
@@ -25,9 +25,9 @@
         otherwise   
             Qm = 8;
     end
-    cbsinfo = nrDLSCHInfo(trblklen,R);
-    bgn = cbsinfo.BGN;
-    Zc = cbsinfo.Zc;
+    cbsinfo = nrDLSCHInfo(trblklen,R);%code block segmentation input
+    bgn = cbsinfo.BGN;%bgn graph
+    Zc = cbsinfo.Zc;%expansion factor
     N = cbsinfo.N;
     if ~isempty(numCB)
         fcnName = 'nrRateRecoverLDPC';
