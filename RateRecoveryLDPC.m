@@ -4,10 +4,8 @@
    modulation = 'QPSK';    
    nlayers = 1;            
    sbits = ones(4500,1);
-   raterec = nrRateRecoverLDPC(sbits,trblklen,rate,rv,modulation,nlayers);
-   size(raterec)
-       numCB = 1;
-       Nref =9;
+       numCB=[];
+       Nref=[];
     modulation = validateInputs(in,trblklen,R,rv,modulation,nlayers);
     typeIn = class(in);
     if isempty(in) || ~trblklen
