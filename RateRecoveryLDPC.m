@@ -1,3 +1,4 @@
+  %raterec=RateRecoveryLDPC(chOut,trblklen,rate,rv,modulation,nlayers)
   trblklen = 4000;        
    rate = 0.5;             
    rv = 0;                 
